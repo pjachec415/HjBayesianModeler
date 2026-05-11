@@ -1,0 +1,280 @@
+================================================================================
+  HjBM — Installation Instructions and Troubleshooting Guide
+  Harrison Jachec | May 2026
+  For research use only. Not for clinical decisions.
+================================================================================
+
+
+────────────────────────────────────────────────────────────────────────────────
+  TABLE OF CONTENTS
+────────────────────────────────────────────────────────────────────────────────
+
+  1. Before You Start — System Requirements
+  2. Installing the App and First Launch
+  2. Launching the App
+  3. Settings Tab — Input Files
+  4. Understanding Output Files
+  5. Regression Models (Poisson, Negative Binomial, Stepwise NB)
+  6. HBM Pipeline (Hierarchical Bayesian Model)
+  7. General / Other Issues
+  8. Contact / Support
+
+
+────────────────────────────────────────────────────────────────────────────────
+  BEFORE YOU START — SYSTEM REQUIREMENTS
+────────────────────────────────────────────────────────────────────────────────
+
+  • Windows 10 or 11 (64-bit)
+  • A C++ compiler installed on your system. HjBM will check for this on
+    launch and show a warning if none is found. Without a compiler, the
+    Bayesian (HBM) pipeline will run very slowly or may not run at all.
+
+    To install the free Microsoft C++ Build Tools:
+    https://visualstudio.microsoft.com/visual-cpp-build-tools/
+    → Select "Desktop development with C++" and click Install.
+    → Restart your computer after installation.
+    → Relaunch HjBM — the warning should no longer appear.
+
+
+────────────────────────────────────────────────────────────────────────────────
+  INSTALLING THE APP AND FIRST LAUNCH
+────────────────────────────────────────────────────────────────────────────────
+
+  1. Move the uncompressed folder HjBM to C:\Program Files\ ensuring it is not 
+     inside another app's folder.
+
+  2. Locate and enter the folder labeled HjBM; this will require administrator 
+     privileges. drag the entry titled HjBM to your desktop. 
+
+  3. Close the windows needed for installation, and double-click the desktop 
+     shortcut to launch! Have fun modelling :P
+
+────────────────────────────────────────────────────────────────────────────────
+  LAUNCHING THE APP
+────────────────────────────────────────────────────────────────────────────────
+
+  Problem:  Windows Defender or SmartScreen blocks the app with a warning
+            like "Windows protected your PC."
+  Solution: Click "More info" then "Run anyway." This is normal for software
+            that has not yet built a reputation with Microsoft. It does not
+            mean the app is harmful.
+
+  Problem:  The app opens but immediately closes with no message.
+  Solution: This usually means a required file is missing. Make sure
+            HjBM.exe and the _internal folder are in the same location
+            and have not been separated.
+
+  Problem:  The splash screen appears but the app never opens.
+  Solution: The app is loading heavy libraries in the background — this can
+            take 10–30 seconds on first launch. Please wait. If it still
+            does not open after 60 seconds, try restarting your computer
+            and launching again.
+
+  Problem:  "Missing C++ Compiler" warning appears on launch.
+  Solution: See "Before You Start" above. The regression models will still
+            work without a compiler, but the HBM pipeline will be very slow.
+
+
+────────────────────────────────────────────────────────────────────────────────
+  SETTINGS TAB — INPUT FILES
+────────────────────────────────────────────────────────────────────────────────
+
+  Problem:  "Unsupported file type" error.
+  Solution: HjBM only accepts CSV (.csv) or Excel (.xlsx) files for data,
+            and GeoJSON (.geojson) or Shapefile (.shp) for spatial files.
+            Make sure your file has the correct extension.
+
+  Problem:  Data loads but columns are not found.
+  Solution: HjBM automatically lowercases and cleans column names
+            (spaces become underscores, special characters become
+            underscores). For example, "Zip Code" becomes "zip_code".
+            Make sure the column names you enter in Settings match this
+            cleaned format.
+
+            Examples:
+              "Zip Code"    →  type: zip_code
+              "ZIP_CODE"    →  type: zip_code
+              "Cases 2024"  →  type: cases_2024
+              "Age 65 +"    →  type: age_65__
+
+  Problem:  Output files are saved in the wrong place.
+  Solution: By default, outputs are saved to the same folder as your data
+            file. To choose a different folder, uncheck the "Save outputs
+            to same folder as source data" checkbox and select your
+            preferred output folder.
+
+
+────────────────────────────────────────────────────────────────────────────────
+  UNDERSTANDING OUTPUT FILES
+────────────────────────────────────────────────────────────────────────────────
+
+  HjBM creates the following files each time you run a model. All files
+  use the naming scheme:  PREFIX_DataFileName_Timestamp.extension
+
+  PREFIX is HBM for the Bayesian pipeline, REG for regression models.
+
+  In your output folder:
+    *.out   — The main results file (model summary, coefficients, VIF).
+    *.csv   — The data table with model results appended (HBM only).
+
+  In the logs\ subfolder inside your output folder:
+    *.log   — Full run log with timestamps. Check here if something
+              went wrong.
+    *.err   — Error details. This file only appears if the run failed.
+              If a run succeeds, no .err file is created.
+
+  Note: Output summaries shown in the in-app terminal may be truncated
+        for long tables. The full results are always in the .out and
+        .log files.
+
+
+────────────────────────────────────────────────────────────────────────────────
+  REGRESSION MODELS (POISSON, NEGATIVE BINOMIAL, STEPWISE NB)
+────────────────────────────────────────────────────────────────────────────────
+
+  Problem:  "Dependent variable '...' not found in columns."
+  Solution: The variable name you entered does not match any column in
+            your data file after name cleaning. Check the cleaned column
+            name format described above under "Input Files."
+
+  Problem:  The stepwise model retains all predictors and does not
+            eliminate any.
+  Solution: This happens when you have more predictors than observations
+            (rows) in your data. The model becomes saturated and no
+            predictor can be eliminated. Try excluding some columns using
+            the "Exclude columns" or "Additional exclusions" fields, or
+            use the "Predictors (include only)" field to specify a
+            smaller set of variables.
+
+  Problem:  All VIF values show as "inf" (infinity).
+  Solution: This is a consequence of the same saturation issue described
+            above (more predictors than rows). Reduce the number of
+            predictors and re-run.
+
+  Problem:  Warnings about "Perfect separation or prediction detected."
+  Solution: This is a statistical warning, not an error. It means the
+            model fits the data perfectly, which usually indicates too
+            many predictors. Results should be interpreted with caution.
+            Reducing the number of predictors is recommended.
+
+  Problem:  Run completes but all p-values are very close to 1.0.
+  Solution: Same cause as above — too many predictors relative to the
+            number of observations. Reduce predictors before running
+            stepwise selection.
+
+
+────────────────────────────────────────────────────────────────────────────────
+  HBM PIPELINE (HIERARCHICAL BAYESIAN MODEL)
+────────────────────────────────────────────────────────────────────────────────
+
+  Problem:  [ID COLUMN NAME] not found in spatial file columns."
+  Solution: The ID column name you entered does not match what is in
+            your spatial file (GeoJSON or Shapefile). Both your data
+            file and your spatial file must have a column with the same
+            name for the ID (e.g., both must have "zip_code"). Check
+            the attribute table of your spatial file and enter the
+            exact column name (it will be auto-lowercased).
+
+  Problem:  "Outcome below minimum" or "Outcome above maximum" error.
+  Solution: One or more values in your outcome column fall outside the
+            Min / Max range you set in the HBM tab. Either adjust the
+            Min and Max values to cover your data range, or check your
+            data for outliers or data entry errors.
+
+  Problem:  "Exposure must be > 0" error.
+  Solution: One or more values in your exposure column (e.g., population)
+            are zero or negative. All exposure values must be strictly
+            greater than zero. Check your data for missing or invalid
+            values in the exposure column.
+
+  Problem:  The HBM pipeline runs for a very long time (20+ minutes).
+  Solution: This is expected behavior for Bayesian MCMC sampling,
+            especially without a C++ compiler installed. The sampling
+            progress is shown in the terminal as:
+              [SAMPLING] Chain X/4 | Step Y/Z | N% complete
+            As long as this counter is increasing, the model is running.
+            Do not close the app. Typical run times:
+              • With C++ compiler:    3–10 minutes
+              • Without compiler:     20–45 minutes
+
+  Problem:  "Convergence warning: r_hat > 1.01"
+  Solution: This means the MCMC chains did not fully converge. Results
+            may be unreliable. This can happen with small datasets,
+            poorly specified models, or too few sampling iterations.
+            Consider checking your data for outliers, verifying that
+            your ID column correctly links your data to your spatial
+            file, and ensuring your spatial file uses polygon geometry
+            (not point geometry).
+
+  Problem:  The spatial file loads but 0 records are merged.
+  Solution: The ID values in your data file and spatial file do not
+            match. For example, your data may have "33601" while your
+            spatial file has "33601.0" or "33601 ". Check that the ID
+            values are formatted identically in both files.
+
+  Problem:  Adjacency matrix has 0 edges.
+  Solution: Your spatial file likely uses point geometry (centroids)
+            rather than polygon geometry. The HBM requires polygon
+            boundaries to determine which regions are neighbors.
+            Re-export your spatial file as polygons from your GIS
+            software.
+
+  Problem:  The terminal shows logging errors about 'NoneType has no
+            attribute write' during sampling.
+  Solution: These are harmless internal messages from the sampling
+            library and do not affect your results. The model is still
+            running correctly.
+
+
+────────────────────────────────────────────────────────────────────────────────
+  GENERAL / OTHER ISSUES
+────────────────────────────────────────────────────────────────────────────────
+
+  Problem:  The Run button is greyed out / unclickable.
+  Solution: A model is currently running. Please wait for it to finish
+            (you will see "[DONE]" in the terminal) before starting
+            another run.
+
+  Problem:  The app appears frozen during a long run.
+  Solution: The app is not frozen — it is running the model in the
+            background. Watch the terminal for the sampling progress
+            counter. Do not force-close the app, as this will cancel
+            the run and no output will be saved.
+
+  Problem:  Output file opens but the table is cut off.
+  Solution: Open the .out file in a text editor (Notepad, Notepad++,
+            VS Code) rather than Word or Excel, as the fixed-width
+            table format renders best in a monospaced font.
+
+  Problem:  "No module named..." or similar error in the terminal.
+  Solution: A required component may not have been installed correctly.
+            Please contact the developer and include the full error
+            text from the terminal or from the .err file in your
+            logs folder.
+
+  Problem:  The app crashes with no error message.
+  Solution: Check the logs folder in your last output directory for a
+            .err file. If no logs folder exists, the crash happened
+            before any run was started. Try restarting the app. If
+            the problem persists, contact the developer.
+
+
+────────────────────────────────────────────────────────────────────────────────
+  CONTACT / SUPPORT
+────────────────────────────────────────────────────────────────────────────────
+
+  For research inquiries or bug reports, please include:
+    • A description of what you were doing when the error occurred
+    • The full text of any error shown in the terminal
+    • The .err file from your logs\ folder (if present)
+    • Your operating system version (Windows 10 / 11)
+
+  © 2026 Harrison Jachec. For research use only.
+  harrisonjachec@usf.edu
+  Attn. Benjamin Jacob CPH #2130
+  4202 E. Fowler Ave. 
+  Tampa, FL 33620
+
+  Not for clinical decision-making.
+
+================================================================================

@@ -1,0 +1,234 @@
+2026-05-05 14:41:09 [INFO] regression:61 — [1] Loading data: C:/Users/hmanj/PycharmProjects/NHL_Poisson/Poisson_Data_Jachec_NH_Lymphoma_Zip(in).csv
+2026-05-05 14:41:09 [INFO] regression:61 —     Dependent variable : vulnerability_index
+2026-05-05 14:41:09 [INFO] regression:61 —     Predictors (102): ['zip_code', 'total_population', 'under_5', '5_9', '10_14', '15_17', '_20_', '_21_', '22_24', '25_29', '30_34', '35_39', '40_44', '45_49', '50_54', '55_59', '60_61', '62_64', '65_66', '67_69', '70_74', '75_79', '80_84', '_85_', 'male', 'male_under_5', 'male_5_9', 'male_10_14', 'male_15_17', 'male_18_19', 'male_20', 'male_21', 'male_22_24', 'male_25_29', 'male_30_34', 'male_35_39', 'male_40_44', 'male_45_49', 'male_50_54', 'male_55_59', 'male_60_61', 'male_62_64', 'male_65_66', 'male_67_69', 'male_70_74', 'male_75_79', 'male_80_84', 'male_85', 'female', 'female_under_5', 'female_5_9', 'female_10_14', 'female_15_17', 'female_18_19', 'female_20', 'female_21', 'female_22_24', 'female_25_29', 'female_30_34', 'female_35_39', 'female_40_44', 'female_45_49', 'female_50_54', 'female_55_59', 'female_60_61', 'female_62_64', 'female_65_66', 'female_67_69', 'female_70_74', 'female_75_79', 'female_80_84', 'female_85', 'white', 'white_male', 'white_female', 'black_african_american', 'black_african_american_male', 'black_african_american_female', 'american_indian_alaska_native', 'american_indian_alaska_native_male', 'american_indian_alaska_native_female', 'asian', 'asian_male', 'asian_female', 'native_hawaiian_pacific_islander', 'native_hawaiian_pacific_islander_male', 'native_hawaiian_pacific_islander_female', 'other_race', 'other_race_male', 'other_race_female', 'two_or_more_races', 'two_or_more_races_male', 'two_or_more_races_female', 'hispanic_or_latino', 'hispanic_or_latino_male', 'hispanic_or_latino_female', 'below_100_percent_poverty_level', '100_to_149_percent_poverty_level', '150_up_poverty_level', 'employed', 'median_income', 'mean_income']
+2026-05-05 14:41:09 [INFO] regression:61 —     Clean observations : 53
+2026-05-05 14:41:09 [INFO] regression:61 — 
+[2] Fitting Poisson regression...
+2026-05-05 14:41:09 [INFO] regression:61 — 
+--- Poisson Regression Results ---
+2026-05-05 14:41:09 [INFO] regression:61 —                   Generalized Linear Model Regression Results                  
+===============================================================================
+Dep. Variable:     vulnerability_index   No. Observations:                   53
+Model:                             GLM   Df Residuals:                        0
+Model Family:                  Poisson   Df Model:                           52
+Link Function:                     Log   Scale:                          1.0000
+Method:                           IRLS   Log-Likelihood:                -96.819
+Date:                 Tue, 05 May 2026   Deviance:                  -2.0306e-15
+Time:                         14:41:09   Pearson chi2:                 9.22e-24
+No. Iterations:                      7   Pseudo R-squ. (CS):             0.8252
+Covariance Type:             nonrobust                                         
+===========================================================================================================
+                                              coef    std err          z      P>|z|      [0.025      0.975]
+-----------------------------------------------------------------------------------------------------------
+const                                   -2.678e-09   8.94e-08     -0.030      0.976   -1.78e-07    1.73e-07
+zip_code                                  8.64e-06   7.86e-05      0.110      0.912      -0.000       0.000
+total_population                           -0.0002      0.001     -0.269      0.788      -0.002       0.001
+under_5                                    -0.0003      0.000     -0.660      0.509      -0.001       0.001
+5_9                                      9.094e-05      0.001      0.115      0.908      -0.001       0.002
+10_14                                      -0.0005      0.001     -0.721      0.471      -0.002       0.001
+15_17                                    7.425e-05      0.001      0.066      0.948      -0.002       0.002
+_20_                                        0.0003      0.000      0.726      0.468      -0.001       0.001
+_21_                                       -0.0004      0.001     -0.399      0.690      -0.002       0.001
+22_24                                       0.0004      0.002      0.248      0.804      -0.003       0.004
+25_29                                       0.0005      0.001      0.765      0.444      -0.001       0.002
+30_34                                      -0.0001      0.000     -0.317      0.751      -0.001       0.001
+35_39                                       0.0001      0.000      0.433      0.665      -0.000       0.001
+40_44                                      -0.0003      0.000     -0.632      0.527      -0.001       0.001
+45_49                                       0.0007      0.000      1.381      0.167      -0.000       0.002
+50_54                                       0.0002      0.001      0.272      0.785      -0.001       0.001
+55_59                                      -0.0004      0.000     -0.773      0.439      -0.001       0.001
+60_61                                     6.52e-05      0.001      0.101      0.920      -0.001       0.001
+62_64                                     2.26e-05      0.001      0.033      0.973      -0.001       0.001
+65_66                                       0.0007      0.001      0.879      0.379      -0.001       0.002
+67_69                                    3.913e-05      0.001      0.068      0.946      -0.001       0.001
+70_74                                      -0.0007      0.002     -0.435      0.663      -0.004       0.002
+75_79                                       0.0003      0.000      0.741      0.459      -0.001       0.001
+80_84                                   -2.544e-06      0.001     -0.004      0.997      -0.001       0.001
+_85_                                     6.103e-05      0.001      0.068      0.946      -0.002       0.002
+male                                    -9.322e-05      0.000     -0.335      0.738      -0.001       0.000
+male_under_5                                0.0003      0.001      0.499      0.618      -0.001       0.002
+male_5_9                                   -0.0003      0.001     -0.359      0.720      -0.002       0.001
+male_10_14                                 -0.0002      0.001     -0.382      0.703      -0.001       0.001
+male_15_17                                 -0.0001      0.001     -0.139      0.890      -0.002       0.002
+male_18_19                               5.711e-05      0.001      0.055      0.956      -0.002       0.002
+male_20                                    -0.0009      0.002     -0.579      0.563      -0.004       0.002
+male_21                                     0.0002      0.001      0.283      0.777      -0.001       0.002
+male_22_24                              -2.589e-07      0.001     -0.000      1.000      -0.002       0.002
+male_25_29                                  0.0007      0.002      0.428      0.669      -0.002       0.004
+male_30_34                                  0.0006      0.001      0.908      0.364      -0.001       0.002
+male_35_39                                  0.0001      0.001      0.194      0.846      -0.001       0.002
+male_40_44                                  0.0007      0.001      0.540      0.589      -0.002       0.003
+male_45_49                              -2.577e-05      0.001     -0.034      0.973      -0.002       0.001
+male_50_54                                  0.0002      0.001      0.341      0.733      -0.001       0.002
+male_55_59                                  0.0001      0.002      0.073      0.942      -0.003       0.003
+male_60_61                                 -0.0002      0.001     -0.119      0.905      -0.003       0.003
+male_62_64                                  0.0005      0.001      0.348      0.728      -0.002       0.003
+male_65_66                                 -0.0001      0.002     -0.071      0.943      -0.003       0.003
+male_67_69                                 -0.0008      0.001     -0.696      0.486      -0.003       0.001
+male_70_74                                 -0.0003      0.001     -0.220      0.826      -0.003       0.003
+male_75_79                                 -0.0003      0.002     -0.163      0.870      -0.003       0.003
+male_80_84                                  0.0003      0.002      0.150      0.881      -0.004       0.005
+male_85                                    -0.0007      0.001     -1.026      0.305      -0.002       0.001
+female                                  -9.111e-05      0.001     -0.156      0.876      -0.001       0.001
+female_under_5                             -0.0006      0.001     -0.822      0.411      -0.002       0.001
+female_5_9                                  0.0003      0.001      0.600      0.548      -0.001       0.001
+female_10_14                               -0.0003      0.000     -0.618      0.537      -0.001       0.001
+female_15_17                                0.0002      0.001      0.319      0.750      -0.001       0.002
+female_18_19                                0.0003      0.001      0.328      0.743      -0.001       0.002
+female_20                                   0.0005      0.001      0.606      0.545      -0.001       0.002
+female_21                                   0.0002      0.002      0.108      0.914      -0.004       0.004
+female_22_24                                0.0005      0.001      0.474      0.636      -0.001       0.002
+female_25_29                               -0.0008      0.001     -0.595      0.552      -0.003       0.002
+female_30_34                               -0.0005      0.001     -0.768      0.442      -0.002       0.001
+female_35_39                               -0.0004      0.001     -0.721      0.471      -0.002       0.001
+female_40_44                             8.542e-06      0.001      0.007      0.994      -0.002       0.002
+female_45_49                                0.0002      0.001      0.334      0.739      -0.001       0.001
+female_50_54                               -0.0006      0.001     -0.671      0.502      -0.002       0.001
+female_55_59                            -4.988e-05      0.001     -0.046      0.964      -0.002       0.002
+female_60_61                                0.0002      0.002      0.117      0.907      -0.003       0.003
+female_62_64                                0.0002      0.001      0.226      0.822      -0.002       0.002
+female_65_66                                0.0002      0.001      0.113      0.910      -0.003       0.003
+female_67_69                             9.575e-05      0.001      0.112      0.911      -0.002       0.002
+female_70_74                                0.0007      0.002      0.369      0.712      -0.003       0.004
+female_75_79                                0.0003      0.001      0.185      0.853      -0.003       0.003
+female_80_84                               -0.0003      0.003     -0.100      0.921      -0.006       0.005
+female_85                                  -0.0004      0.001     -0.298      0.766      -0.003       0.002
+white                                   -1.127e-05      0.000     -0.037      0.970      -0.001       0.001
+white_male                                 -0.0001      0.001     -0.159      0.874      -0.002       0.001
+white_female                                0.0001      0.001      0.204      0.838      -0.001       0.001
+black_african_american                   3.482e-05      0.000      0.121      0.904      -0.001       0.001
+black_african_american_male              2.439e-05      0.001      0.047      0.962      -0.001       0.001
+black_african_american_female            1.044e-05      0.001      0.018      0.986      -0.001       0.001
+american_indian_alaska_native               0.0001      0.001      0.240      0.811      -0.001       0.001
+american_indian_alaska_native_male      -3.105e-05      0.001     -0.061      0.951      -0.001       0.001
+american_indian_alaska_native_female        0.0002      0.000      0.334      0.738      -0.001       0.001
+asian                                      -0.0001      0.000     -0.500      0.617      -0.001       0.000
+asian_male                                 -0.0001      0.001     -0.134      0.894      -0.002       0.002
+asian_female                             1.566e-05      0.001      0.017      0.987      -0.002       0.002
+native_hawaiian_pacific_islander           -0.0005      0.000     -0.951      0.342      -0.001       0.000
+native_hawaiian_pacific_islander_male      -0.0003      0.001     -0.337      0.736      -0.002       0.001
+native_hawaiian_pacific_islander_female    -0.0002      0.001     -0.191      0.848      -0.002       0.002
+other_race                                  0.0002      0.000      0.496      0.620      -0.000       0.001
+other_race_male                             0.0007      0.001      1.088      0.277      -0.001       0.002
+other_race_female                          -0.0005      0.001     -0.768      0.443      -0.002       0.001
+two_or_more_races                        6.895e-05      0.000      0.158      0.875      -0.001       0.001
+two_or_more_races_male                     -0.0002      0.001     -0.384      0.701      -0.001       0.001
+two_or_more_races_female                    0.0003      0.001      0.421      0.674      -0.001       0.002
+hispanic_or_latino                      -7.484e-05      0.000     -0.462      0.644      -0.000       0.000
+hispanic_or_latino_male                    -0.0002      0.001     -0.427      0.670      -0.001       0.001
+hispanic_or_latino_female                   0.0001      0.000      0.301      0.764      -0.001       0.001
+below_100_percent_poverty_level             0.0002      0.000      0.578      0.563      -0.001       0.001
+100_to_149_percent_poverty_level            0.0005      0.001      0.805      0.421      -0.001       0.002
+150_up_poverty_level                        0.0005      0.000      1.136      0.256      -0.000       0.001
+employed                                   -0.0002      0.002     -0.127      0.899      -0.003       0.003
+median_income                           -2.735e-05   5.61e-05     -0.488      0.626      -0.000    8.25e-05
+mean_income                              1.667e-05   2.73e-05      0.610      0.542   -3.69e-05    7.02e-05
+===========================================================================================================
+2026-05-05 14:41:10 [INFO] regression:61 — 
+--- VIF ---
+2026-05-05 14:41:10 [INFO] regression:61 —                                Variable  VIF
+                                  const  0.0
+                               zip_code  inf
+                       total_population  inf
+                                under_5  inf
+                                    5_9  inf
+                                  10_14  inf
+                                  15_17  inf
+                                   _20_  inf
+                                   _21_  inf
+                                  22_24  inf
+                                  25_29  inf
+                                  30_34  inf
+                                  35_39  inf
+                                  40_44  inf
+                                  45_49  inf
+                                  50_54  inf
+                                  55_59  inf
+                                  60_61  inf
+                                  62_64  inf
+                                  65_66  inf
+                                  67_69  inf
+                                  70_74  inf
+                                  75_79  inf
+                                  80_84  inf
+                                   _85_  inf
+                                   male  inf
+                           male_under_5  inf
+                               male_5_9  inf
+                             male_10_14  inf
+                             male_15_17  inf
+                             male_18_19  inf
+                                male_20  inf
+                                male_21  inf
+                             male_22_24  inf
+                             male_25_29  inf
+                             male_30_34  inf
+                             male_35_39  inf
+                             male_40_44  inf
+                             male_45_49  inf
+                             male_50_54  inf
+                             male_55_59  inf
+                             male_60_61  inf
+                             male_62_64  inf
+                             male_65_66  inf
+                             male_67_69  inf
+                             male_70_74  inf
+                             male_75_79  inf
+                             male_80_84  inf
+                                male_85  inf
+                                 female  inf
+                         female_under_5  inf
+                             female_5_9  inf
+                           female_10_14  inf
+                           female_15_17  inf
+                           female_18_19  inf
+                              female_20  inf
+                              female_21  inf
+                           female_22_24  inf
+                           female_25_29  inf
+                           female_30_34  inf
+                           female_35_39  inf
+                           female_40_44  inf
+                           female_45_49  inf
+                           female_50_54  inf
+                           female_55_59  inf
+                           female_60_61  inf
+                           female_62_64  inf
+                           female_65_66  inf
+                           female_67_69  inf
+                           female_70_74  inf
+                           female_75_79  inf
+                           female_80_84  inf
+                              female_85  inf
+                                  white  inf
+                             white_male  inf
+                           white_female  inf
+                 black_african_american  inf
+            black_african_american_male  inf
+          black_african_american_female  inf
+          american_indian_alaska_native  inf
+     american_indian_alaska_native_male  inf
+   american_indian_alaska_native_female  inf
+                                  asian  inf
+                             asian_male  inf
+                           asian_female  inf
+       native_hawaiian_pacific_islander  inf
+  native_hawaiian_pacific_islander_male  inf
+native_hawaiian_pacific_islander_female  inf
+                             other_race  inf
+                        other_race_male  inf
+                      other_race_female  inf
+                      two_or_more_races  inf
+                 two_or_more_races_male  inf
+               two_or_more_races_female  inf
+                     hispanic_or_latino  inf
+                hispanic_or_latino_male  inf
+              hispanic_or_latino_female  inf
+        below_100_percent_poverty_level  inf
+       100_to_149_percent_poverty_level  inf
+                   150_up_poverty_level  inf
+                               employed  inf
+                          median_income  inf
+                            mean_income  inf
+2026-05-05 14:41:10 [INFO] regression:61 — 
+[DONE] Output saved to C:/Users/hmanj/OneDrive/Desktop/Research/Jacob Lab/HjBayesianModeler/Out_Test/may third/Run_3\REG_Poisson_Data_Jachec_NH_Lymphoma_Zip(in)_1778006469_report.out
